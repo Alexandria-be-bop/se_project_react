@@ -1,0 +1,116 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0000004d;
+}
+
+.modal__content {
+  position: relative;
+  padding: 28px 28px 24px 28px;
+  background-color: white;
+  border: 1px solid #0000004d;
+  border-radius: 20px;
+  max-width: 496px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal__close-btn {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background-color: white;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__title {
+  margin: 0 0 24px;
+}
+
+.modal__label {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+/* radio fieldset set */
+.modal__radio-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: none;
+  padding: 0;
+  margin: 0 0 32px;
+}
+
+.modal__legend {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  padding-bottom: 12px;
+}
+
+.modal__radio-input {
+  margin: 0 8px 0 0;
+}
+
+.modal__radio-input:checked {
+  accent-color: #000000;
+}
+
+/* right here I was trying to say for the radio when checked change the opacity of 
+the labels although i realise now that if it did work i wouldn't know how 
+to exlude the selected radio */
+.modal__radio-input input[type="radio"]:checked + .modal__label_type_radio {
+  opacity: 50%;
+}
+
+.modal__label_type_radio {
+  cursor: pointer;
+}
+
+/* submit button */
+.modal__submit {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: black;
+  cursor: pointer;
+}
+
+.modal__submit:hover {
+  opacity: 60%;
+}
+
+.modal__submit:disabled {
+  opacity: 30%;
+}
