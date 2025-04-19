@@ -4,18 +4,33 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../main/main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { use } from "react";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
+  const [activeModal, setActiveModal] = useState("");
+
+  const addGarmentModal = () => {
+    setActiveModal("add-garment");
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
 
   return (
     <div className="page">
       <div className="page__content">
-        <Header />
+        <Header onButtonClick={addGarmentModal} />
         <Main weatherData={weatherData} />
       </div>
       {/* Garment Modal */}
-      <ModalWithForm title={"New garment"} buttonText={"Add garment"}>
+      <ModalWithForm
+        title={"New garment"}
+        buttonText={"Add garment"}
+        activeModal={activeModal}
+        closeActiveModal={closeActiveModal}
+      >
         <label
           htmlFor="name"
           className="modal__label"
