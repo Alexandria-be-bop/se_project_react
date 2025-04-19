@@ -1,0 +1,17 @@
+.footer {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 85px 42px 24px 40px;
+}
+
+.footer__name {
+  margin: 0;
+}
+
+.footer__date {
+  margin: 0;
+}
