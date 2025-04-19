@@ -1,19 +1,40 @@
-import "./Header.css"
+import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
-function Header({ onButtonClick }) {
-    return (
-        <header className="header">
-            <img src={logo} alt="WTWR Logo" className="header__logo"></img>
-            <p className="header__time-and-place">June 15, New York</p>
-            <button onClick={onButtonClick} type="button" className="header__add-clothes-btn">+ Add clothes</button>
-            <div className="header__user-container">
-                <p className="header__username">Terrence Tegegne</p>
-                <img src={avatar} alt="Terrence Tegegne" className="header__avatar" />
-            </div>
-        </header>
-    )
+function Header({ onButtonClick, weatherData }) {
+  const currentDate = new Date().toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
+
+  return (
+    <header className="header">
+      <img
+        src={logo}
+        alt="WTWR Logo"
+        className="header__logo"
+      ></img>
+      <p className="header__time-and-place">
+        {currentDate}, {weatherData.city}
+      </p>
+      <button
+        onClick={onButtonClick}
+        type="button"
+        className="header__add-clothes-btn"
+      >
+        + Add clothes
+      </button>
+      <div className="header__user-container">
+        <p className="header__username">Terrence Tegegne</p>
+        <img
+          src={avatar}
+          alt="Terrence Tegegne"
+          className="header__avatar"
+        />
+      </div>
+    </header>
+  );
 }
 
 export default Header;
