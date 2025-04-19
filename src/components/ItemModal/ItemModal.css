@@ -1,0 +1,28 @@
+.modal__content_type_image {
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal_image {
+  width: 498px;
+  height: 498px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.modal__footer {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 20px 32px 32px 32px;
+  box-sizing: border-box;
+}
+
+.modal__caption {
+  margin: 0 0 12px;
+}
+
+.modal__weather {
+  margin: 0;
+}
