@@ -1,11 +1,13 @@
 import "./Footer.css"
 
  function Footer() {
+  
+
   return (
-    <div className="footer">
+    <footer>
       <p className="footer__name">Developed by Liam Devine</p>
-      <p className="footer__date">2025</p>
-    </div>
+      <p className="footer__date">{new Date().getFullYear()}</p>
+    </footer>
   );
 }
 
