@@ -1,0 +1,67 @@
+.toggle-switch {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.toggle-switch:hover {
+  border-color: black;
+}
+
+.toggle-switch__checkbox {
+  opacity: 0%;
+  cursor: pointer;
+}
+
+.toggle-switch__slider {
+  background-color: black;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  top: -2px;
+  left: -2px;
+  transition: all 0.3s;
+}
+
+.toggle-switch__text {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 4px;
+  transition: 0.3s;
+}
+
+.toggle-switch__text:hover {
+  color: black;
+}
+
+.toggle-switch__text_F {
+  left: 8px;
+}
+
+.toggle-switch__text_C {
+  right: 8px;
+}
+
+/* move slider to the right */
+.toggle-switch__checkbox:checked ~ .toggle-switch__slider {
+  left: 26px;
+}
+
+/* change text color according to slider place */
+.toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
+  color: white;
+}
+
+/* recenter the "C" to the slider */
+.toggle-switch__checkbox:checked ~ .toggle-switch__text_C {
+  color: white;
+  right: 7px;
+}

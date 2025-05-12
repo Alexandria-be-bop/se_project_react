@@ -1,4 +1,5 @@
 import "./Header.css";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
@@ -18,6 +19,7 @@ function Header({ onButtonClick, weatherData }) {
       <p className="header__time-and-place">
         {currentDate}, {weatherData.city}
       </p>
+      <ToggleSwitch/>
       <button
         onClick={onButtonClick}
         type="button"
