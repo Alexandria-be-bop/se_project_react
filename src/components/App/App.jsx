@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../main/main";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import { coordinates, APIkey } from "../../utils/constants";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import AddItemModal from "../AddItemModal/AddItemModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -18,6 +22,7 @@ function App() {
     isDay: true,
   });
 
+  const [clothingItems, SetClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -37,6 +42,16 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+  };
+
+  const handleAddItemModalSubmit = (name, imageUrl, weather) => {
+    // remove the no id error
+    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
+    SetClothingItems([
+      { name, link: imageUrl, weather, _id: newId },
+      ...clothingItems,
+    ]);
+    closeActiveModal();
   };
 
   // API weather lookup
@@ -65,89 +80,19 @@ function App() {
           <Main
             weatherData={weatherData}
             handleCardClick={handleCardClick}
+            clothingItems={clothingItems}
           />
         </div>
         {/* Garment Modal */}
-        <ModalWithForm
-          title={"New garment"}
-          buttonText={"Add garment"}
+        <AddItemModal
           isOpen={activeModal === "add-garment"}
           closeActiveModal={closeActiveModal}
-        >
-          <label
-            htmlFor="name"
-            className="modal__label"
-          >
-            Name
-            <input
-              id="name"
-              type="text"
-              className="modal__input"
-              placeholder="Name"
-            />
-          </label>
-          <label
-            htmlFor="imageUrl"
-            className="modal__label"
-          >
-            Image
-            <input
-              id="imageUrl"
-              type="url"
-              className="modal__input"
-              placeholder="Image Url"
-            />
-          </label>
-
-          {/* radio */}
-          <fieldset className="modal__radio-btns">
-            <legend className="modal__legend">Select the weather type:</legend>
-            <label
-              htmlFor="hot"
-              type="radio"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="hot"
-                name="Temp"
-                type="radio"
-                className="modal__radio-input"
-              />
-              Hot
-            </label>
-            <label
-              htmlFor="warm"
-              type="radio"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="warm"
-                name="Temp"
-                type="radio"
-                className="modal__radio-input"
-              />
-              Warm
-            </label>
-            <label
-              htmlFor="cold"
-              type="radio"
-              className="modal__label modal__label_type_radio"
-            >
-              <input
-                id="cold"
-                name="Temp"
-                type="radio"
-                className="modal__radio-input"
-              />
-              Cold
-            </label>
-          </fieldset>
-        </ModalWithForm>
+          onAddItemModalSubmit={handleAddItemModalSubmit}
+        />
         <ItemModal
           activeModal={activeModal}
           closeActiveModal={closeActiveModal}
           selectedCard={selectedCard}
-          onButtonClick={closeActiveModal}
         />
         <Footer />
       </div>
