@@ -1,3 +1,4 @@
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import "./ItemModal.css";
 
 function ItemModal({ activeModal, closeActiveModal, selectedCard }) {
@@ -15,7 +16,7 @@ function ItemModal({ activeModal, closeActiveModal, selectedCard }) {
           />
         </button>
         <img
-          src={selectedCard.link}
+          src={selectedCard.imageUrl}
           alt={selectedCard.name}
           className="modal_image"
         />
@@ -23,6 +24,13 @@ function ItemModal({ activeModal, closeActiveModal, selectedCard }) {
           <h2 className="modal__caption">{selectedCard.name}</h2>
           <p className="modal__weather">Weather: {selectedCard.weather}</p>
         </div>
+        <button
+          onClick={activeModal === "Delete-Item"}
+          className="modal__Delete-btn"
+          type="button"
+        >
+          Delete item
+        </button>
       </div>
     </div>
   );

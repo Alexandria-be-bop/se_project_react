@@ -1,7 +1,8 @@
 .modal__content_type_image {
-  padding: 0px !important; 
+  padding: 0px !important;
   overflow: hidden;
 }
+/* Fix this ^ */
 
 .modal_image {
   width: 498px;
@@ -23,4 +24,16 @@
 
 .modal__weather {
   margin: 0;
+}
+
+.modal__Delete-btn {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  color: #ff4d00;
+  position: absolute;
+  right: 32px;
+  bottom: 68px;
 }

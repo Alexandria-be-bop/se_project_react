@@ -9,11 +9,13 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
   coordinates,
   APIkey,
-  defaultClothingItems,
+  // defaultClothingItems,
 } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import Profile from "../Profile/Profile";
+import { getItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -23,7 +25,7 @@ function App() {
     isDay: true,
   });
 
-  const [clothingItems, SetClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, SetClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -46,7 +48,7 @@ function App() {
   };
 
   const handleAddItemModalSubmit = (name, imageUrl, weather) => {
-    // remove the no id error
+    // remove the no id error - Temp
     const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
     SetClothingItems([
       { name, link: imageUrl, weather, _id: newId },
@@ -66,6 +68,15 @@ function App() {
         console.error(error);
         setWeatherDataLoaded(false);
       });
+  }, []);
+
+  // API Clothing lookup
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        SetClothingItems(data);
+      })
+      .catch(console.error);
   }, []);
 
   return (
@@ -92,7 +103,12 @@ function App() {
               ></Route>
               <Route
                 path="/profile"
-                element={<Profile onCardClick={onCardClick}/>}
+                element={
+                  <Profile
+                    onCardClick={onCardClick}
+                    clothingItems={clothingItems}
+                  />
+                }
               ></Route>
             </Routes>
           </div>
@@ -101,6 +117,10 @@ function App() {
             isOpen={activeModal === "add-garment"}
             closeActiveModal={closeActiveModal}
             onAddItemModalSubmit={handleAddItemModalSubmit}
+          />
+          <DeleteItemModal
+            isOpen={activeModal}
+            closeActiveModal={closeActiveModal}
           />
           <ItemModal
             activeModal={activeModal}
