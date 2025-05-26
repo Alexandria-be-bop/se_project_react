@@ -1,13 +1,11 @@
 .modal__content_type_image {
-  padding: 0;
+  padding: 0px !important; 
   overflow: hidden;
 }
 
 .modal_image {
   width: 498px;
   height: 498px;
-  object-fit: cover;
-  object-position: 50% 50%;
 }
 
 .modal__footer {

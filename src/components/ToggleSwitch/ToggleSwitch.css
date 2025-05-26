@@ -6,6 +6,7 @@
   border-radius: 20px;
   cursor: pointer;
   box-sizing: border-box;
+  margin: 20px;
 }
 
 .toggle-switch:hover {
