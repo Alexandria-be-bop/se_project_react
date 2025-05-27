@@ -5,13 +5,13 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then((res) => apiCheck(res));
 }
 
-function addItems(data) {
+function addItems(name, imageUrl, weather) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({name, imageUrl, weather}),
   }).then((res) => apiCheck(res));
 }
 

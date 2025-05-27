@@ -15,7 +15,7 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import Profile from "../Profile/Profile";
-import { getItems } from "../../utils/api";
+import { getItems, addItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -54,11 +54,13 @@ function App() {
   const handleAddItemModalSubmit = (name, imageUrl, weather) => {
     // remove the no id error - Temp
     const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
-    SetClothingItems([
-      { name, link: imageUrl, weather, _id: newId },
-      ...clothingItems,
-    ]);
-    closeActiveModal();
+    addItems(name, imageUrl, weather).then((item) => {
+      SetClothingItems([
+       item,
+        ...clothingItems,
+      ]);
+      closeActiveModal();
+    });
   };
 
   // API weather lookup
