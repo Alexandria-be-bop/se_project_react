@@ -11,7 +11,7 @@ import {
   APIkey,
   // defaultClothingItems,
 } from "../../utils/constants";
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import Profile from "../Profile/Profile";
@@ -55,10 +55,7 @@ function App() {
     // remove the no id error - Temp
     const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
     addItems(name, imageUrl, weather).then((item) => {
-      SetClothingItems([
-       item,
-        ...clothingItems,
-      ]);
+      SetClothingItems([item, ...clothingItems]);
       closeActiveModal();
     });
   };
