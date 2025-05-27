@@ -39,6 +39,10 @@ function App() {
     setSelectedCard(card);
   };
 
+  const addDeleteItemModal = () => {
+    setActiveModal("remove-garment");
+  };
+
   const addGarmentModal = () => {
     setActiveModal("add-garment");
   };
@@ -119,13 +123,16 @@ function App() {
             onAddItemModalSubmit={handleAddItemModalSubmit}
           />
           <DeleteItemModal
-            isOpen={activeModal}
+            isOpen={activeModal === "remove-garment"}
             closeActiveModal={closeActiveModal}
+            id={selectedCard._id}
+            updateClothingItems={SetClothingItems}
           />
           <ItemModal
             activeModal={activeModal}
             closeActiveModal={closeActiveModal}
             selectedCard={selectedCard}
+            addDeleteItemModal={addDeleteItemModal}
           />
           <Footer />
         </div>

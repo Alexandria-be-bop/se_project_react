@@ -1,7 +1,7 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "../ClothesSection/ClothesSection.css";
 
-function ClothesSection({ onCardClick, clothingItems}) {
+function ClothesSection({ onCardClick, clothingItems }) {
   return (
     <div className="clothes-section">
       <div className="clothes__header">

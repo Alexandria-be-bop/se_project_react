@@ -1,0 +1,34 @@
+.modal__content_type_delete-modal {
+  max-width: 670px;
+  padding: 60px 0 60px 0;
+}
+
+.modal__text_type_warning {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  max-width: 367px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal__button {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal__button-delete {
+  color: #ff4d00;
+}

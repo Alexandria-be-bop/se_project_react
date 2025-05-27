@@ -1,7 +1,11 @@
-import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, closeActiveModal, selectedCard }) {
+function ItemModal({
+  activeModal,
+  closeActiveModal,
+  selectedCard,
+  addDeleteItemModal,
+}) {
   return (
     <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_image">
@@ -25,7 +29,7 @@ function ItemModal({ activeModal, closeActiveModal, selectedCard }) {
           <p className="modal__weather">Weather: {selectedCard.weather}</p>
         </div>
         <button
-          onClick={activeModal === "Delete-Item"}
+          onClick={addDeleteItemModal}
           className="modal__Delete-btn"
           type="button"
         >

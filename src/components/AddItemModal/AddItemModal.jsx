@@ -7,6 +7,7 @@ export default function AddItemModal({
   closeActiveModal,
   onAddItemModalSubmit,
 }) {
+
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
@@ -24,7 +25,6 @@ export default function AddItemModal({
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     onAddItemModalSubmit(name, imageUrl, weather);
     setName("");
     setImageUrl("");
