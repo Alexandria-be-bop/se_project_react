@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
-import { addItems } from "../../utils/api";
 
 export default function AddItemModal({
   isOpen,
@@ -20,17 +19,12 @@ export default function AddItemModal({
     setImageUrl(e.target.value);
   };
 
-  const HandleWeatherChange = (e) => {
+  const handleWeatherChange = (e) => {
     setWeather(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const additem = {
-      name: name,
-      imageUrl: imageUrl,
-      weather: weather,
-    };
     onAddItemModalSubmit(name, imageUrl, weather);
     setName("");
     setImageUrl("");
@@ -90,7 +84,7 @@ export default function AddItemModal({
             name="Temp"
             type="radio"
             className="modal__radio-input"
-            onChange={HandleWeatherChange}
+            onChange={handleWeatherChange}
             checked={weather === "hot"}
           />
           Hot
@@ -106,7 +100,7 @@ export default function AddItemModal({
             name="Temp"
             type="radio"
             className="modal__radio-input"
-            onChange={HandleWeatherChange}
+            onChange={handleWeatherChange}
             checked={weather === "warm"}
           />
           Warm
@@ -122,7 +116,7 @@ export default function AddItemModal({
             name="Temp"
             type="radio"
             className="modal__radio-input"
-            onChange={HandleWeatherChange}
+            onChange={handleWeatherChange}
             checked={weather === "cold"}
           />
           Cold

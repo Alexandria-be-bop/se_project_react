@@ -11,7 +11,7 @@ import {
   APIkey,
   // defaultClothingItems,
 } from "../../utils/constants";
-import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import Profile from "../Profile/Profile";
@@ -69,7 +69,6 @@ function App() {
       })
       .catch((error) => {
         console.error(error);
-        setWeatherDataLoaded(false);
       });
   }, []);
 

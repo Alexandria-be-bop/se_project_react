@@ -26,7 +26,7 @@ export const weatherBanners = [
   },
   {
     day: true,
-    condition: "stormy",
+    condition: "storm",
     url: new URL("../assets/day/stormy-day.svg", import.meta.url).href,
   },
   {

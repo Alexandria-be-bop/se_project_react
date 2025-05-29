@@ -1,10 +1,10 @@
-.clothes__header {
+.clothes-section__header {
   display: flex;
   gap: 20px;
   padding-bottom: 16px;
 }
 
-.clothes__button {
+.clothes-section__button {
   font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 20px;
@@ -14,7 +14,7 @@
   padding: 0;
 }
 
-.clothes__text {
+.clothes-section__text {
   font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 20px;

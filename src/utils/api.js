@@ -1,4 +1,4 @@
-import apiCheck from "./apiTools";
+import apiCheck from "./apiCheck";
 const baseUrl = "http://localhost:3001";
 
 function getItems() {
