@@ -109,6 +109,7 @@ function App() {
                   <Profile
                     onCardClick={onCardClick}
                     clothingItems={clothingItems}
+                    onButtonClick={addGarmentModal}
                   />
                 }
               ></Route>
