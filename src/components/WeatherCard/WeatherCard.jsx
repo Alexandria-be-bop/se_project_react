@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./WeatherCard.css";
 import { weatherBanners, defaultWeatherBanner } from "../../utils/constants";
-import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 // Filter weather conditons does not equal current
 function WeatherCard({ weatherData }) {
