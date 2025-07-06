@@ -7,4 +7,4 @@ WTWR is a full stack website where any user can uploade clothes that they own
 tech used:
     React and eslint
 
-`https://github.com/Alexandria-be-bop/se_project_react`
+`https://github.com/Alexandria-be-bop/se_project_express`
