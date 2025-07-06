@@ -11,10 +11,9 @@ function addItems(name, imageUrl, weather) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({name, imageUrl, weather}),
+    body: JSON.stringify({ name, imageUrl, weather }),
   }).then((res) => apiCheck(res));
 }
-
 
 function deleteItems(_id) {
   return fetch(`${baseUrl}/items/${_id}`, {
@@ -22,4 +21,4 @@ function deleteItems(_id) {
   }).then((res) => apiCheck(res));
 }
 
-export { getItems, deleteItems, addItems };
+export { getItems, deleteItems, addItems, baseUrl };

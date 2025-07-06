@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -16,8 +17,40 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 import Profile from "../Profile/Profile";
 import { getItems, addItems } from "../../utils/api";
+import * as auth from "../../utils/api";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+import ProtectedRoute from "../ProtectedRoute";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = ({ username, password }) => {
+    // If username or password empty, return without sending a request.
+    if (!username || !password) {
+      return;
+    }
+
+    auth
+      .authorize(username, password)
+      .then((data) => {
+        localStorage.setItem("jwt", data.jwt);
+        setIsLoggedIn(true);
+        closeActiveModal();
+        console.log(data);
+      })
+      .catch(console.error);
+  };
+
+  const handleRegistration = ({ email, password, name, avatarUrl }) => {
+    auth
+      .register(email, password, name, avatarUrl)
+      .then(() => {
+        // TODO: handle succesful registration
+      })
+      .catch(console.error);
+  };
+
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: {},
@@ -37,6 +70,10 @@ function App() {
   const onCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const newUserRegistration = () => {
+    setActiveModal("register");
   };
 
   const addDeleteItemModal = () => {
@@ -102,31 +139,48 @@ function App() {
                     clothingItems={clothingItems}
                   />
                 }
-              ></Route>
+              />
               <Route
                 path="/profile"
                 element={
-                  <Profile
-                    onCardClick={onCardClick}
-                    clothingItems={clothingItems}
-                    onButtonClick={addGarmentModal}
-                  />
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      onCardClick={onCardClick}
+                      clothingItems={clothingItems}
+                      onButtonClick={addGarmentModal}
+                    />
+                  </ProtectedRoute>
                 }
-              ></Route>
+              />
+              <Route path="*" />
             </Routes>
           </div>
-          {/* Garment Modal */}
+          {/* Modals */}
+          <LoginModal
+            activeModal={activeModal === "login-modal"}
+            closeActiveModal={closeActiveModal}
+            onLogin={handleLogin}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            handleRegistration={handleRegistration}
+            closeActiveModal={closeActiveModal}
+            newUserRegistration={newUserRegistration}
+          />
+
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             closeActiveModal={closeActiveModal}
             onAddItemModalSubmit={handleAddItemModalSubmit}
           />
+
           <DeleteItemModal
             isOpen={activeModal === "remove-garment"}
             closeActiveModal={closeActiveModal}
             id={selectedCard._id}
             updateClothingItems={SetClothingItems}
           />
+
           <ItemModal
             activeModal={activeModal}
             closeActiveModal={closeActiveModal}
