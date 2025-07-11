@@ -1,7 +1,7 @@
 import { deleteItems, getItems } from "../../utils/api";
 import "./DeleteItemModal.css";
 
-function DeleteItemModal({ isOpen, closeActiveModal, id, updateClothingItems }) {
+function DeleteItemModal({ activeModal, closeActiveModal, id, updateClothingItems }) {
   const handleDelete = () => {
     deleteItems(id).then(() => {
       getItems().then((updatedItems) => {
@@ -12,7 +12,7 @@ function DeleteItemModal({ isOpen, closeActiveModal, id, updateClothingItems }) 
   };
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div className={`modal ${activeModal ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_delete-modal">
         <button
           onClick={closeActiveModal}
@@ -37,7 +37,7 @@ function DeleteItemModal({ isOpen, closeActiveModal, id, updateClothingItems }) 
           </button>
           <button
             onClick={closeActiveModal}
-            className="modal__button"
+            className="modal__button-red"
           >
             Cancel
           </button>

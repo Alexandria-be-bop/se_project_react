@@ -30,7 +30,7 @@
 }
 
 .toggle-switch__text {
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.5);

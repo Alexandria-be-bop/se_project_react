@@ -4,7 +4,13 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import { Link } from "react-router-dom";
 
-function Header({ onButtonClick, weatherData }) {
+function Header({
+  onButtonClick,
+  weatherData,
+  isLoggedIn,
+  newUserRegistration,
+  onLoginClick,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -23,23 +29,48 @@ function Header({ onButtonClick, weatherData }) {
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      <button
-        onClick={onButtonClick}
-        type="button"
-        className="header__add-clothes-btn"
-      >
-        + Add clothes
-      </button>
-      <Link to="/profile" className="header__link">
-        <div className="header__user-container">
-          <p className="header__username">Terrence Tegegne</p>
-          <img
-            src={avatar}
-            alt="Terrence Tegegne"
-            className="header__avatar"
-          />
+      {/* hide these */}
+      {isLoggedIn ? (
+        <>
+          <button
+            onClick={onButtonClick}
+            type="button"
+            className="header__add-clothes-btn"
+          >
+            + Add clothes
+          </button>
+          <Link
+            to="/profile"
+            className="header__link"
+          >
+            <div className="header__user-container">
+              <p className="header__username">Terrence Tegegne</p>
+              <img
+                src={avatar}
+                alt="Terrence Tegegne"
+                className="header__avatar"
+              />
+            </div>
+          </Link>
+        </>
+      ) : (
+        <div className="header__authenticate">
+          <button
+            onClick={newUserRegistration}
+            type="button"
+            className="header__button-auth"
+          >
+            Sign Up
+          </button>
+          <button
+            onClick={onLoginClick}
+            type="button"
+            className="header__button-auth"
+          >
+            Log In
+          </button>
         </div>
-      </Link>
+      )}
     </header>
   );
 }

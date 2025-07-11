@@ -1,7 +1,9 @@
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
 function ClothesSection({ onCardClick, clothingItems, onButtonClick }) {
+  // const userCards = cards.filter(card => card.owner === CurrentUserContext?._id);
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">

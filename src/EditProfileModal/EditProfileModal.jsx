@@ -1,21 +1,13 @@
 import { useState } from "react";
-import "./LoginModal.css";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import "./EditProfileModal.css";
 
-const LoginModal = ({
-  activeModal,
-  closeActiveModal,
-  handleLogin,
-  newUserRegistration,
-}) => {
+const currentUser = CurrentUserContext;
+const EditProfileModal = ({ activeModal, closeActiveModal }) => {
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    username: currentUser.username || "",
+    avatarUrl: currentUser.avatarUrl || "",
   });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(data);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,57 +32,45 @@ const LoginModal = ({
           />
         </button>
 
-        {/* login form  */}
-        <h2 className="modal__title">Log in</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="modal__form"
-        >
+        {/* Change profile data form  */}
+        <h2 className="modal__title">Change profile data</h2>
+        <form className="modal__form">
           <label
-            htmlFor="email"
+            htmlFor="username"
             className="modal__label"
           >
-            Email*
+            Name*
           </label>
           <input
-            id="email"
+            id="username"
             type="text"
-            name="email"
-            placeholder="Email"
-            required
-            value={data.email}
+            placeholder="Name"
+            value={data.username}
             onChange={handleChange}
             className="modal__input"
+            required
           />
           <label
-            htmlFor="password"
+            htmlFor="avatarUrl"
             className="modal__label"
           >
-            Password*
+            Avatar URL*
           </label>
           <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            value={data.password}
+            id="avatarUrl"
+            type="url"
+            placeholder="Avatar URL"
+            value={data.avatarUrl}
             onChange={handleChange}
             className="modal__input"
+            required
           />
           <div className="modal__button-container">
             <button
               type="submit"
               className="modal__submit"
             >
-              Log in
-            </button>
-            <button
-              onClick={newUserRegistration}
-              type="button"
-              className="modal__button modal__button-gray"
-            >
-              or Log in
+              Save changes
             </button>
           </div>
         </form>
@@ -99,4 +79,4 @@ const LoginModal = ({
   );
 };
 
-export default LoginModal;
+export default EditProfileModal;

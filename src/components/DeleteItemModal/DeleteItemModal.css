@@ -4,7 +4,7 @@
 }
 
 .modal__text_type_warning {
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 20px;
   text-align: center;
@@ -21,7 +21,7 @@
 }
 
 .modal__button {
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 20px;
   background: transparent;

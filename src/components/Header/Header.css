@@ -45,3 +45,17 @@
   text-decoration: none;
   color: black;
 }
+
+.header__authenticate {
+  display: flex;
+  gap: 20px;
+}
+
+.header__button-auth {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 20px;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}

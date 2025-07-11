@@ -45,6 +45,10 @@
 }
 
 .modal__title {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
   margin: 0 0 24px;
 }
 
@@ -106,7 +110,7 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  width: 127px;
+  max-width: 127px;
   color: white;
   padding: 8px 16px;
   border: none;

@@ -1,0 +1,15 @@
+.modal__title-login {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__button-container {
+  display: flex;
+  gap: 12px;
+}
+
+.modal__button-gray{
+  opacity: 50%;
+}

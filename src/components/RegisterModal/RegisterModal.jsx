@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./RegisterModal.css";
 const RegisterModal = ({
   handleRegistration,
   activeModal,
   closeActiveModal,
-  newUserRegistration,
-  isOpen,
+  onLoginClick,
 }) => {
   // The inputs are controlled via a single piece of state: an object
   // object called `data`. This lets us avoid writing separate change
@@ -16,12 +15,12 @@ const RegisterModal = ({
     email: "",
     password: "",
     name: "",
-    avatarUrl: "",
+    avatar: "",
   });
 
   const onRegistration = (event) => {
     event.preventDefault();
-    handleRegistration;
+    handleRegistration(data);
   };
   // This function fires whenever an input is changed, and it updates
   // the value of the changed input. Note that the keys of this
@@ -35,7 +34,7 @@ const RegisterModal = ({
   };
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div className={`modal ${activeModal ? "modal_opened" : ""}`}>
       <div className="modal__content ">
         <button
           onClick={closeActiveModal}
@@ -47,62 +46,93 @@ const RegisterModal = ({
             alt="x"
           />
         </button>
-        <p className="register__welcome">Please register.</p>
+        <h2 className="modal__title">Sign Up</h2>
         <form
-          className="register__form"
+          className="modal__form"
           onSubmit={onRegistration}
         >
-          <label htmlFor="email">Email:</label>
+          <label
+            htmlFor="email"
+            className="modal__label"
+          >
+            Email*
+          </label>
           <input
             id="email"
-            name="email"
             type="email"
+            name="email"
+            placeholder="Email"
             value={data.email}
             onChange={handleChange}
+            className="modal__input"
+            required
           />
-          <label htmlFor="password">Password:</label>
+          <label
+            htmlFor="password"
+            className="modal__label"
+          >
+            Password*
+          </label>
           <input
             id="password"
-            name="password"
             type="password"
+            name="password"
+            placeholder="Password"
             value={data.password}
             onChange={handleChange}
+            className="modal__input"
+            required
           />
-          <label htmlFor="name">Name:</label>
+          <label
+            htmlFor="name"
+            className="modal__label"
+          >
+            Name*
+          </label>
           <input
             id="name"
-            name="name"
             type="text"
+            name="name"
+            placeholder="Name"
             value={data.username}
             onChange={handleChange}
+            className="modal__input"
+            required
           />
 
-          <label htmlFor="avatarUrl">Avatar URL:</label>
+          <label
+            htmlFor="avatar"
+            className="modal__label"
+          >
+            Avatar URL*
+          </label>
           <input
-            id="avatarUrl"
-            name="avatarUrl"
+            id="avatar"
             type="url"
+            name="avatar"
+            placeholder="Avatar URL"
             value={data.avatarUrl}
             onChange={handleChange}
+            className="modal__input"
+            required
           />
-          <div className="register__button-container">
+          <div className="modal__button-container">
             <button
+              onClick={onRegistration}
               type="submit"
-              className="register__link"
+              className="modal__submit"
             >
               Sign up
             </button>
+            <button
+              onClick={onLoginClick}
+              type="button"
+              className="modal__button modal__button-gray"
+            >
+              or Log in
+            </button>
           </div>
         </form>
-        <div className="register__signin">
-          <p>Already a member?</p>
-          <Link
-            to="login"
-            className="register__login-link"
-          >
-            Log in here
-          </Link>
-        </div>
       </div>
     </div>
   );
