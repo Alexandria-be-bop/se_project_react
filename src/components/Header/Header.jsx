@@ -1,8 +1,9 @@
+import { useContext } from "react";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Header({
   onButtonClick,
@@ -11,6 +12,8 @@ function Header({
   newUserRegistration,
   onLoginClick,
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -20,7 +23,7 @@ function Header({
     <header className="header">
       <Link to="/">
         <img
-          src={logo}
+         src={logo}
           alt="WTWR Logo"
           className="header__logo"
         ></img>
@@ -44,9 +47,9 @@ function Header({
             className="header__link"
           >
             <div className="header__user-container">
-              <p className="header__username">Terrence Tegegne</p>
+              <p className="header__username">{currentUser.name}</p>
               <img
-                src={avatar}
+                src={currentUser.avatar}
                 alt="Terrence Tegegne"
                 className="header__avatar"
               />

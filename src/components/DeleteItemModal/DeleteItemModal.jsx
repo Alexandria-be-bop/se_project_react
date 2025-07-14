@@ -37,7 +37,7 @@ function DeleteItemModal({ activeModal, closeActiveModal, id, updateClothingItem
           </button>
           <button
             onClick={closeActiveModal}
-            className="modal__button-red"
+            className="modal__button"
           >
             Cancel
           </button>

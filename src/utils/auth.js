@@ -22,3 +22,24 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }),
   }).then((res) => apiCheck(res));
 };
+
+export const getUserInfo = () => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => apiCheck(res));
+};
+
+export const updateProfile = ({ name, avatar }) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then((res) => apiCheck(res));
+};

@@ -59,3 +59,8 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.header__avatar {
+  max-width: 40px;
+  max-height: 40px;
+}

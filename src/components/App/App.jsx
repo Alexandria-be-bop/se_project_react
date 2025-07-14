@@ -25,17 +25,21 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import EditProfileModal from "../../EditProfileModal/EditProfileModal";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({
+    _id: "",
+    name: "",
+    avatar: "",
+    email: "",
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = ({ email, password }) => {
     auth
       .authorize(email, password)
       .then((data) => {
-        localStorage.setItem("jwt", data.jwt);
+        localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
         closeActiveModal();
-        console.log(data);
       })
       .catch(console.error);
   };
@@ -48,6 +52,20 @@ function App() {
         closeActiveModal();
       })
       .catch(console.error);
+  };
+
+  const handleProfileUpdate = ({ name, avatar }) => {
+    auth
+      .updateProfile({ name, avatar })
+      .then(() => {
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
   };
 
   const [weatherData, setWeatherData] = useState({
@@ -116,6 +134,15 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token)
+      auth.getUserInfo(token).then((userData) => {
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+      });
+  }, []);
+
   // API Clothing lookup
   useEffect(() => {
     getItems()
@@ -130,7 +157,7 @@ function App() {
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <CurrentUserContext.Provider value={currentUser}>
+        <CurrentUserContext.Provider value={{ currentUser }}>
           <div className="page">
             <div className="page__content">
               <Header
@@ -160,6 +187,7 @@ function App() {
                         clothingItems={clothingItems}
                         onButtonClick={addGarmentModal}
                         editProfile={editProfile}
+                        handleLogout={handleLogout}
                       />
                     </ProtectedRoute>
                   }
@@ -174,6 +202,7 @@ function App() {
             <EditProfileModal
               activeModal={activeModal === "editprofile"}
               closeActiveModal={closeActiveModal}
+              handleProfileUpdate={handleProfileUpdate}
             />
             <LoginModal
               activeModal={activeModal === "login-modal"}

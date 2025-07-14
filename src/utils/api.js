@@ -9,6 +9,7 @@ function addItems(name, imageUrl, weather) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, imageUrl, weather }),

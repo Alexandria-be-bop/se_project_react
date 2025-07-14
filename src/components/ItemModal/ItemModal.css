@@ -2,7 +2,6 @@
   padding: 0px !important;
   overflow: hidden;
 }
-/* Fix this ^ */
 
 .modal_image {
   width: 498px;
@@ -33,7 +32,13 @@
   background-color: transparent;
   border: none;
   color: #ff4d00;
+  cursor: pointer;
   position: absolute;
   right: 32px;
   bottom: 68px;
+}
+
+.modal__delete-btn_hidden {
+  color: transparent;
+  pointer-events: none;
 }

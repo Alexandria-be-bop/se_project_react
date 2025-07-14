@@ -20,7 +20,7 @@
 
 .modal__content {
   position: relative;
-  padding: 28px 28px 24px 28px;
+  padding: 28px 28px 24px;
   background-color: white;
   border: 1px solid #0000004d;
   border-radius: 20px;
@@ -60,6 +60,11 @@
 }
 
 .modal__input {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+
   display: block;
   border: none;
   border-bottom: 1px solid black;

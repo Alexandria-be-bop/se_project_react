@@ -27,6 +27,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  padding: 0px;
 }
 
 .modal__button-delete {

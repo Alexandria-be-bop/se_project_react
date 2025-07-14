@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import "./EditProfileModal.css";
+import Profile from "../components/Profile/Profile";
 
-const currentUser = CurrentUserContext;
-const EditProfileModal = ({ activeModal, closeActiveModal }) => {
+const EditProfileModal = ({
+  activeModal,
+  closeActiveModal,
+  handleProfileUpdate,
+}) => {
+  const { currentUser } = useContext(CurrentUserContext);
+
   const [data, setData] = useState({
-    username: currentUser.username || "",
-    avatarUrl: currentUser.avatarUrl || "",
+    name: "",
+    avatar: "",
   });
+
+  const onProfileUpdate = (event) => {
+    event.preventDefault();
+    handleProfileUpdate(data);
+    setData({ name: "", avatar: "" });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,33 +46,38 @@ const EditProfileModal = ({ activeModal, closeActiveModal }) => {
 
         {/* Change profile data form  */}
         <h2 className="modal__title">Change profile data</h2>
-        <form className="modal__form">
+        <form
+          onSubmit={onProfileUpdate}
+          className="modal__form"
+        >
           <label
-            htmlFor="username"
+            htmlFor="name"
             className="modal__label"
           >
             Name*
           </label>
           <input
-            id="username"
+            id="name"
             type="text"
+            name="name"
             placeholder="Name"
-            value={data.username}
+            value={data.name}
             onChange={handleChange}
             className="modal__input"
             required
           />
           <label
-            htmlFor="avatarUrl"
+            htmlFor="avatar"
             className="modal__label"
           >
             Avatar URL*
           </label>
           <input
-            id="avatarUrl"
+            id="avatar"
             type="url"
+            name="avatar"
             placeholder="Avatar URL"
-            value={data.avatarUrl}
+            value={data.avatar}
             onChange={handleChange}
             className="modal__input"
             required

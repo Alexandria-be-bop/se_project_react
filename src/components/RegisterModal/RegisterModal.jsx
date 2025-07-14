@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "./RegisterModal.css";
 const RegisterModal = ({
@@ -9,8 +8,7 @@ const RegisterModal = ({
   onLoginClick,
 }) => {
   // The inputs are controlled via a single piece of state: an object
-  // object called `data`. This lets us avoid writing separate change
-  // handlers for each input.
+  // object called `data`. 
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -23,8 +21,7 @@ const RegisterModal = ({
     handleRegistration(data);
   };
   // This function fires whenever an input is changed, and it updates
-  // the value of the changed input. Note that the keys of this
-  // object match the name attributes of the corresponding inputs.
+  // the value of the changed input. 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
