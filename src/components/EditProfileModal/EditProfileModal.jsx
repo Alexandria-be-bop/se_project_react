@@ -10,12 +10,13 @@ export default function EditProfileModal({
 }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [data, setData] = useState({ name: "", avatar: "" });
+  const [avatarError, setAvatarError] = useState("");
 
   useEffect(() => {
     if (activeModal) {
       setData({ name: currentUser.name, avatar: currentUser.avatar });
     } else {
-      setData({ name: "", avatar: "" });
+      setAvatarError("");
     }
   }, [activeModal, currentUser]);
 
@@ -31,7 +32,25 @@ export default function EditProfileModal({
     e.preventDefault();
     if (!isDataChanged) return;
     handleProfileUpdate(data);
-    closeActiveModal();
+  };
+
+  const isAvatarValid = (avatar) => {
+    try {
+      new URL(avatar);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const isFormValid = data.name.trim() && isAvatarValid(data.avatar);
+
+  const handleAvatarValidation = (e) => {
+    if (isAvatarValid(e.target.value)) {
+      setAvatarError("");
+    } else {
+      setAvatarError("Invalid avatar");
+    }
   };
 
   return (
@@ -41,7 +60,7 @@ export default function EditProfileModal({
       activeModal={activeModal}
       closeActiveModal={closeActiveModal}
       onSubmit={onProfileUpdate}
-      disabled={!isDataChanged}
+      disabled={!isDataChanged || !isFormValid}
     >
       <label
         htmlFor="name"
@@ -75,7 +94,9 @@ export default function EditProfileModal({
           onChange={handleChange}
           className="modal__input"
           required
+          onBlur={handleAvatarValidation}
         />
+        <p className={`modal__errorMessage`}>{avatarError}</p>
       </label>
     </ModalWithForm>
   );

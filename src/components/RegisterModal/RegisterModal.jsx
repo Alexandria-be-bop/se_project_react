@@ -8,6 +8,9 @@ export default function RegisterModal({
   closeActiveModal,
   onLoginClick,
 }) {
+  const [emailError, setEmailError] = useState("");
+  const [avatarError, setAvatarError] = useState("");
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -43,6 +46,22 @@ export default function RegisterModal({
     data.name.trim() &&
     isAvatarValid(data.avatar);
 
+  const handleEmailValidation = (e) => {
+    if (isEmailValid(e.target.value)) {
+      setEmailError("");
+    } else {
+      setEmailError("Invalid email");
+    }
+  };
+
+  const handleAvatarValidation = (e) => {
+    if (isAvatarValid(e.target.value)) {
+      setAvatarError("");
+    } else {
+      setAvatarError("Invalid avatar");
+    }
+  };
+
   return (
     <ModalWithForm
       title="Sign Up"
@@ -68,7 +87,9 @@ export default function RegisterModal({
           onChange={handleChange}
           className="modal__input"
           required
+          onBlur={handleEmailValidation}
         />
+        <p className={`modal__errorMessage`}>{emailError}</p>
       </label>
 
       <label
@@ -120,7 +141,9 @@ export default function RegisterModal({
           onChange={handleChange}
           className="modal__input"
           required
+          onBlur={handleAvatarValidation}
         />
+        <p className={`modal__errorMessage`}>{avatarError}</p>
       </label>
     </ModalWithForm>
   );

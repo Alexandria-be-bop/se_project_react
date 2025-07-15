@@ -10,6 +10,7 @@ export default function AddItemModal({
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
+  const [urlError, setUrlError] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -42,6 +43,13 @@ export default function AddItemModal({
 
   const isFormValid = name.trim() && isUrlValid(imageUrl) && weather.trim();
 
+  const handleUrlValidation = (e) => {
+    if (isUrlValid(e.target.value)) {
+      setUrlError("");
+    } else {
+      setUrlError("Invalid avatar");
+    }
+  };
   return (
     <ModalWithForm
       title="New garment"
@@ -80,7 +88,9 @@ export default function AddItemModal({
           required
           onChange={handleImageChange}
           value={imageUrl}
+          onBlur={handleUrlValidation}
         />
+        <p className={`modal__errorMessage`}>{urlError}</p>
       </label>
 
       {/* radio */}

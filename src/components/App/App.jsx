@@ -33,7 +33,11 @@ function App() {
     email: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginError, setLogginError] = useState("");
 
+  const clearLoginError = () => {
+    setLogginError("");
+  };
   const handleLogin = ({ email, password }) => {
     auth
       .authorize(email, password)
@@ -44,9 +48,13 @@ function App() {
       .then((userData) => {
         setCurrentUser(userData);
         setIsLoggedIn(true);
+        setLogginError("");
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        setLogginError("Email or password incorrect");
+        console.log(error);
+      });
   };
 
   const handleRegistration = ({ email, password, name, avatar }) => {
@@ -68,7 +76,13 @@ function App() {
   };
 
   const handleProfileUpdate = ({ name, avatar }) => {
-    auth.updateProfile({ name, avatar }).catch(console.error);
+    auth
+      .updateProfile({ name, avatar })
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const handleLogout = () => {
@@ -137,14 +151,14 @@ function App() {
       ? addCardLike(id, token)
           .then((updatedCard) => {
             SetClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err))
       : removeCardLike(id, token)
           .then((updatedCard) => {
             SetClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err));
@@ -239,6 +253,8 @@ function App() {
               closeActiveModal={closeActiveModal}
               handleLogin={handleLogin}
               newUserRegistration={newUserRegistration}
+              loginError={loginError}
+              clearLoginError={clearLoginError}
             />
             <RegisterModal
               activeModal={activeModal === "register"}

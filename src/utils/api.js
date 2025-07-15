@@ -39,6 +39,10 @@ function removeCardLike(id) {
 function deleteItems(id) {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      "Content-Type": "application/json",
+    },
   }).then((res) => apiCheck(res));
 }
 

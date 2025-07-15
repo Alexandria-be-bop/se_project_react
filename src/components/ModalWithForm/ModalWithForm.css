@@ -142,3 +142,12 @@
 .modal__button-gray {
   opacity: 50%;
 }
+
+.modal__errorMessage {
+  font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ff4d00;
+  margin: 0px 0px 32px;
+}

@@ -7,8 +7,11 @@ export default function LoginModal({
   closeActiveModal,
   handleLogin,
   newUserRegistration,
+  loginError,
+  clearLoginError,
 }) {
   const [data, setData] = useState({ email: "", password: "" });
+  const [emailError, setEmailError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +27,8 @@ export default function LoginModal({
   // clear fields when not active
   useEffect(() => {
     if (!activeModal) {
+      setEmailError("");
+      clearLoginError();
       setData({ email: "", password: "" });
     }
   }, [activeModal]);
@@ -32,6 +37,13 @@ export default function LoginModal({
 
   const isFormValid = isEmailValid(data.email) && data.password.trim();
 
+  const handleEmailValidation = (e) => {
+    if (isEmailValid(e.target.value)) {
+      setEmailError("");
+    } else {
+      setEmailError("Invalid email");
+    }
+  };
   return (
     <ModalWithForm
       title="Log In"
@@ -57,7 +69,9 @@ export default function LoginModal({
           onChange={handleChange}
           className="modal__input"
           required
+          onBlur={handleEmailValidation}
         />
+        <p className={`modal__errorMessage`}>{emailError}</p>
       </label>
 
       <label
@@ -75,6 +89,7 @@ export default function LoginModal({
           className="modal__input"
           required
         />
+        <p className={`modal__errorMessage`}>{loginError}</p>
       </label>
     </ModalWithForm>
   );
