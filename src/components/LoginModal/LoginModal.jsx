@@ -21,6 +21,7 @@ export default function LoginModal({
     setData({ email: "", password: "" });
   };
 
+  // clear fields when not active
   useEffect(() => {
     if (!activeModal) {
       setData({ email: "", password: "" });
