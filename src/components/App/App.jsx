@@ -137,8 +137,6 @@ function App() {
   };
 
   const handleAddItemModalSubmit = (name, imageUrl, weather) => {
-    // remove the no id error - Temp
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
     addItems(name, imageUrl, weather).then((item) => {
       SetClothingItems([item, ...clothingItems]);
       closeActiveModal();

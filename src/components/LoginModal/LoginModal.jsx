@@ -31,7 +31,7 @@ export default function LoginModal({
       clearLoginError();
       setData({ email: "", password: "" });
     }
-  }, [activeModal]);
+  }, [activeModal, clearLoginError]);
 
   const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
