@@ -22,7 +22,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import EditProfileModal from "../../EditProfileModal/EditProfileModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { addCardLike, removeCardLike } from "../../utils/api";
 
 function App() {
