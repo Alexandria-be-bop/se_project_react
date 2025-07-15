@@ -120,7 +120,7 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  max-width: 127px;
+  max-width: 135px;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -136,8 +136,9 @@
 
 .modal__submit:disabled {
   opacity: 30%;
+  cursor: default;
 }
 
-.modal__button-gray{
+.modal__button-gray {
   opacity: 50%;
 }

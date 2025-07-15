@@ -1,99 +1,81 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import "./EditProfileModal.css";
-import Profile from "../components/Profile/Profile";
 
-const EditProfileModal = ({
+export default function EditProfileModal({
   activeModal,
   closeActiveModal,
   handleProfileUpdate,
-}) => {
+}) {
   const { currentUser } = useContext(CurrentUserContext);
+  const [data, setData] = useState({ name: "", avatar: "" });
 
-  const [data, setData] = useState({
-    name: "",
-    avatar: "",
-  });
-
-  const onProfileUpdate = (event) => {
-    event.preventDefault();
-    handleProfileUpdate(data);
-    setData({ name: "", avatar: "" });
-  };
+  useEffect(() => {
+    if (activeModal) {
+      setData({ name: currentUser.name, avatar: currentUser.avatar });
+    } else {
+      setData({ name: "", avatar: "" });
+    }
+  }, [activeModal, currentUser]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const isDataChanged =
+    data.name !== currentUser.name || data.avatar !== currentUser.avatar;
+
+  const onProfileUpdate = (e) => {
+    e.preventDefault();
+    if (!isDataChanged) return;
+    handleProfileUpdate(data);
+    closeActiveModal();
   };
 
   return (
-    <div className={`modal ${activeModal ? "modal_opened" : ""}`}>
-      {/* close button */}
-      <div className="modal__content">
-        <button
-          onClick={closeActiveModal}
-          className="modal__close-btn"
-          type="button"
-        >
-          <img
-            src="../src/assets/close-btn.svg"
-            alt="x"
-          />
-        </button>
+    <ModalWithForm
+      title="Change Profile Data"
+      buttonText="Save Changes"
+      activeModal={activeModal}
+      closeActiveModal={closeActiveModal}
+      onSubmit={onProfileUpdate}
+      disabled={!isDataChanged}
+    >
+      <label
+        htmlFor="name"
+        className="modal__label"
+      >
+        Name*
+        <input
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Name"
+          value={data.name}
+          onChange={handleChange}
+          className="modal__input"
+          required
+        />
+      </label>
 
-        {/* Change profile data form  */}
-        <h2 className="modal__title">Change profile data</h2>
-        <form
-          onSubmit={onProfileUpdate}
-          className="modal__form"
-        >
-          <label
-            htmlFor="name"
-            className="modal__label"
-          >
-            Name*
-          </label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={data.name}
-            onChange={handleChange}
-            className="modal__input"
-            required
-          />
-          <label
-            htmlFor="avatar"
-            className="modal__label"
-          >
-            Avatar URL*
-          </label>
-          <input
-            id="avatar"
-            type="url"
-            name="avatar"
-            placeholder="Avatar URL"
-            value={data.avatar}
-            onChange={handleChange}
-            className="modal__input"
-            required
-          />
-          <div className="modal__button-container">
-            <button
-              type="submit"
-              className="modal__submit"
-            >
-              Save changes
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <label
+        htmlFor="avatar"
+        className="modal__label"
+      >
+        Avatar URL*
+        <input
+          id="avatar"
+          name="avatar"
+          type="url"
+          placeholder="Avatar URL"
+          value={data.avatar}
+          onChange={handleChange}
+          className="modal__input"
+          required
+        />
+      </label>
+    </ModalWithForm>
   );
-};
-
-export default EditProfileModal;
+}
