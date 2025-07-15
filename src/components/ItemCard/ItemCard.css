@@ -9,17 +9,37 @@
   overflow: hidden;
 }
 
+.card__header {
+  position: absolute;
+  display: flex;
+  margin: 15px 0 0 0;
+  gap: 10px;
+}
+
 .card__title {
   font-family: "Cabinet Grotesk", "Times New Roman", Times, serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  position: absolute;
+  margin: 0;
   border-radius: 4px;
   padding: 2px 12px;
-  margin: 15px 0 0 0;
   color: #00000099;
   background-color: white;
+}
+
+.card__like-btn {
+  background: transparent url("../../assets/defaultBtn.svg") center/contain
+    no-repeat;
+  padding: 7px 9px;
+  opacity: 60%;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-btn-liked {
+  background-image: url("../../assets/likedBtn.svg");
+  opacity: 100%;
 }
 
 .card__image {

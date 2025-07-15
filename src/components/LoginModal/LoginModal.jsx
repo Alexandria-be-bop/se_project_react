@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./LoginModal.css";
 
 const LoginModal = ({
@@ -15,6 +15,7 @@ const LoginModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(data);
+    setData({ email: "", password: "" });
   };
 
   const handleChange = (e) => {
@@ -24,6 +25,12 @@ const LoginModal = ({
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    if (!activeModal) {
+      setData({ email: "", password: "" });
+    }
+  }, [activeModal]);
 
   return (
     <div className={`modal ${activeModal ? "modal_opened" : ""}`}>
@@ -83,14 +90,14 @@ const LoginModal = ({
               type="submit"
               className="modal__submit"
             >
-              Log in
+              Log In
             </button>
             <button
               onClick={newUserRegistration}
               type="button"
               className="modal__button modal__button-gray"
             >
-              or Log in
+              or Sign Up
             </button>
           </div>
         </form>

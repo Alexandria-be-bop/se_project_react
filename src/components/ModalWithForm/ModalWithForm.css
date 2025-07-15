@@ -29,6 +29,11 @@
   box-sizing: border-box;
 }
 
+.modal__content_type_image {
+  padding: 0px;
+  overflow: hidden;
+}
+
 .modal__close-btn {
   position: absolute;
   top: 20px;
@@ -131,4 +136,8 @@
 
 .modal__submit:disabled {
   opacity: 30%;
+}
+
+.modal__button-gray{
+  opacity: 50%;
 }

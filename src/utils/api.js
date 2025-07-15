@@ -16,10 +16,37 @@ function addItems(name, imageUrl, weather) {
   }).then((res) => apiCheck(res));
 }
 
-function deleteItems(_id) {
-  return fetch(`${baseUrl}/items/${_id}`, {
+function addCardLike(id) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => apiCheck(res));
+}
+
+function removeCardLike(id) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => apiCheck(res));
+}
+
+function deleteItems(id) {
+  return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
   }).then((res) => apiCheck(res));
 }
 
-export { getItems, deleteItems, addItems, baseUrl };
+export {
+  baseUrl,
+  getItems,
+  addItems,
+  addCardLike,
+  removeCardLike,
+  deleteItems,
+};

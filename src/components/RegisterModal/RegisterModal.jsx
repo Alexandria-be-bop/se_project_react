@@ -119,14 +119,14 @@ const RegisterModal = ({
               type="submit"
               className="modal__submit"
             >
-              Sign up
+              Sign Up
             </button>
             <button
               onClick={onLoginClick}
               type="button"
               className="modal__button modal__button-gray"
             >
-              or Log in
+              or Log In
             </button>
           </div>
         </form>

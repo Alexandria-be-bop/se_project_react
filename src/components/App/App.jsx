@@ -23,6 +23,8 @@ import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import EditProfileModal from "../../EditProfileModal/EditProfileModal";
+import ItemCard from "../ItemCard/ItemCard";
+import { addCardLike, removeCardLike } from "../../utils/api";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -36,8 +38,12 @@ function App() {
   const handleLogin = ({ email, password }) => {
     auth
       .authorize(email, password)
-      .then((data) => {
-        localStorage.setItem("jwt", data.token);
+      .then(({ token }) => {
+        localStorage.setItem("jwt", token);
+        return auth.getUserInfo(token);
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
         setIsLoggedIn(true);
         closeActiveModal();
       })
@@ -48,6 +54,14 @@ function App() {
     auth
       .register(email, password, name, avatar)
       .then(() => {
+        return auth.authorize(email, password);
+      })
+      .then(({ token }) => {
+        localStorage.setItem("jwt", token);
+        return auth.getUserInfo(token);
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
         setIsLoggedIn(true);
         closeActiveModal();
       })
@@ -65,6 +79,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
+    setCurrentUser({});
     setIsLoggedIn(false);
   };
 
@@ -122,6 +137,26 @@ function App() {
     });
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    console.log(isLiked, id, token)
+    !isLiked
+      ? addCardLike(id, token)
+          .then((updatedCard) => {
+            SetClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : removeCardLike(id, token)
+          .then((updatedCard) => {
+            SetClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   // API weather lookup
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -175,6 +210,7 @@ function App() {
                       weatherData={weatherData}
                       onCardClick={onCardClick}
                       clothingItems={clothingItems}
+                      handleCardLike={handleCardLike}
                     />
                   }
                 />
@@ -188,6 +224,7 @@ function App() {
                         onButtonClick={addGarmentModal}
                         editProfile={editProfile}
                         handleLogout={handleLogout}
+                        handleCardLike={handleCardLike}
                       />
                     </ProtectedRoute>
                   }
