@@ -31,6 +31,17 @@ export default function AddItemModal({
     setWeather("");
   };
 
+  const isUrlValid = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+  
+  const isFormValid = name.trim() && isUrlValid(imageUrl) && weather.trim();
+
   return (
     <ModalWithForm
       title="New garment"
@@ -38,6 +49,7 @@ export default function AddItemModal({
       activeModal={activeModal}
       closeActiveModal={closeActiveModal}
       onSubmit={handleSubmit}
+      disabled={!isFormValid}
     >
       <label
         htmlFor="name"
