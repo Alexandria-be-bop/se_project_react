@@ -23,7 +23,6 @@ import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import EditProfileModal from "../../EditProfileModal/EditProfileModal";
-import ItemCard from "../ItemCard/ItemCard";
 import { addCardLike, removeCardLike } from "../../utils/api";
 
 function App() {
@@ -69,12 +68,7 @@ function App() {
   };
 
   const handleProfileUpdate = ({ name, avatar }) => {
-    auth
-      .updateProfile({ name, avatar })
-      .then(() => {
-        closeActiveModal();
-      })
-      .catch(console.error);
+    auth.updateProfile({ name, avatar }).catch(console.error);
   };
 
   const handleLogout = () => {
@@ -139,7 +133,6 @@ function App() {
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    console.log(isLiked, id, token)
     !isLiked
       ? addCardLike(id, token)
           .then((updatedCard) => {

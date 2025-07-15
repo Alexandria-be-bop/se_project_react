@@ -102,6 +102,7 @@ export default function RegisterModal({
           onChange={handleChange}
           className="modal__input"
           required
+          maxLength={30}
         />
       </label>
 

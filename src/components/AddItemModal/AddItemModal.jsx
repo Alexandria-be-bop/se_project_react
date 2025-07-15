@@ -39,7 +39,7 @@ export default function AddItemModal({
       return false;
     }
   };
-  
+
   const isFormValid = name.trim() && isUrlValid(imageUrl) && weather.trim();
 
   return (
@@ -61,6 +61,7 @@ export default function AddItemModal({
           type="text"
           className="modal__input"
           placeholder="Name"
+          maxLength="12"
           required
           onChange={handleNameChange}
           value={name}
