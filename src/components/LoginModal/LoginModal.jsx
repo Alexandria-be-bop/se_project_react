@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
@@ -33,6 +33,9 @@ export default function LoginModal({
     }
   }, [activeModal, clearLoginError]);
 
+  const emailId = useId();
+  const passwordId = useId();
+
   const isEmailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const isFormValid = isEmailValid(data.email) && data.password.trim();
@@ -56,12 +59,12 @@ export default function LoginModal({
       disabled={!isFormValid}
     >
       <label
-        htmlFor="email"
+        htmlFor={emailId}
         className="modal__label"
       >
         Email*
         <input
-          id="email"
+          id={emailId}
           name="email"
           type="email"
           placeholder="Email"
@@ -70,17 +73,18 @@ export default function LoginModal({
           className="modal__input"
           required
           onBlur={handleEmailValidation}
+          autoComplete="email"
         />
         <p className={`modal__errorMessage`}>{emailError}</p>
       </label>
 
       <label
-        htmlFor="password"
+        htmlFor={passwordId}
         className="modal__label"
       >
         Password*
         <input
-          id="password"
+          id={passwordId}
           name="password"
           type="password"
           placeholder="Password"
@@ -88,6 +92,7 @@ export default function LoginModal({
           onChange={handleChange}
           className="modal__input"
           required
+          autoComplete="current-password"
         />
         <p className={`modal__errorMessage`}>{loginError}</p>
       </label>

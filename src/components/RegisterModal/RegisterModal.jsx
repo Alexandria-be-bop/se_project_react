@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
@@ -10,6 +10,11 @@ export default function RegisterModal({
 }) {
   const [emailError, setEmailError] = useState("");
   const [avatarError, setAvatarError] = useState("");
+
+  const emailId = useId();
+  const passwordId = useId();
+  const nameId = useId();
+  const avatarId = useId();
 
   const [data, setData] = useState({
     email: "",
@@ -74,12 +79,12 @@ export default function RegisterModal({
       disabled={!isFormValid}
     >
       <label
-        htmlFor="email"
+        htmlFor={emailId}
         className="modal__label"
       >
         Email*
         <input
-          id="email"
+          id={emailId}
           name="email"
           type="email"
           placeholder="Email"
@@ -88,17 +93,18 @@ export default function RegisterModal({
           className="modal__input"
           required
           onBlur={handleEmailValidation}
+          autoComplete="email"
         />
         <p className={`modal__errorMessage`}>{emailError}</p>
       </label>
 
       <label
-        htmlFor="password"
+        htmlFor={passwordId}
         className="modal__label"
       >
         Password*
         <input
-          id="password"
+          id={passwordId}
           name="password"
           type="password"
           placeholder="Password"
@@ -106,16 +112,17 @@ export default function RegisterModal({
           onChange={handleChange}
           className="modal__input"
           required
+          autoComplete="new-password"
         />
       </label>
 
       <label
-        htmlFor="name"
+        htmlFor={nameId}
         className="modal__label"
       >
         Name*
         <input
-          id="name"
+          id={nameId}
           name="name"
           type="text"
           placeholder="Name"
@@ -124,16 +131,17 @@ export default function RegisterModal({
           className="modal__input"
           required
           maxLength={30}
+          autoComplete="name"
         />
       </label>
 
       <label
-        htmlFor="avatar"
+        htmlFor={avatarId}
         className="modal__label"
       >
         Avatar URL*
         <input
-          id="avatar"
+          id={avatarId}
           name="avatar"
           type="url"
           placeholder="Avatar URL"

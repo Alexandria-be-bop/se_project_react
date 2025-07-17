@@ -98,7 +98,7 @@ function App() {
     isDay: true,
   });
 
-  const [clothingItems, SetClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -138,7 +138,7 @@ function App() {
 
   const handleAddItemModalSubmit = (name, imageUrl, weather) => {
     addItems(name, imageUrl, weather).then((item) => {
-      SetClothingItems([item, ...clothingItems]);
+      setClothingItems([item, ...clothingItems]);
       closeActiveModal();
     });
   };
@@ -148,14 +148,14 @@ function App() {
     !isLiked
       ? addCardLike(id, token)
           .then((updatedCard) => {
-            SetClothingItems((cards) =>
+            setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
           .catch((err) => console.log(err))
       : removeCardLike(id, token)
           .then((updatedCard) => {
-            SetClothingItems((cards) =>
+            setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
@@ -177,17 +177,20 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token)
-      auth.getUserInfo(token).then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-      });
+      auth
+        .getUserInfo(token)
+        .then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => console.log(err));
   }, []);
 
   // API Clothing lookup
   useEffect(() => {
     getItems()
       .then((data) => {
-        SetClothingItems(data);
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
@@ -270,7 +273,7 @@ function App() {
               activeModal={activeModal === "remove-garment"}
               closeActiveModal={closeActiveModal}
               id={selectedCard._id}
-              updateClothingItems={SetClothingItems}
+              updateClothingItems={setClothingItems}
             />
             <ItemModal
               activeModal={activeModal}

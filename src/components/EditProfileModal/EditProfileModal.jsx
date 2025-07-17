@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useId } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./EditProfileModal.css";
@@ -11,6 +11,9 @@ export default function EditProfileModal({
   const { currentUser } = useContext(CurrentUserContext);
   const [data, setData] = useState({ name: "", avatar: "" });
   const [avatarError, setAvatarError] = useState("");
+
+  const nameId = useId();
+  const avatarId = useId();
 
   useEffect(() => {
     if (activeModal) {
@@ -63,12 +66,12 @@ export default function EditProfileModal({
       disabled={!isDataChanged || !isFormValid}
     >
       <label
-        htmlFor="name"
+        htmlFor={nameId}
         className="modal__label"
       >
         Name*
         <input
-          id="name"
+          id={nameId}
           name="name"
           type="text"
           placeholder="Name"
@@ -81,12 +84,12 @@ export default function EditProfileModal({
       </label>
 
       <label
-        htmlFor="avatar"
+        htmlFor={avatarId}
         className="modal__label"
       >
         Avatar URL*
         <input
-          id="avatar"
+          id={avatarId}
           name="avatar"
           type="url"
           placeholder="Avatar URL"
