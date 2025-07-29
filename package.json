@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "wtwr.cloe.cl",
+  "deploy": "npm run build && scp -r ./dist/* tripletenuser@domainname.example.com:/home/tripletenuser/frontend",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
