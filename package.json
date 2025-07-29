@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "wtwr.cloe.cl",
-  "deploy": "npm run build && scp -r ./dist/* tripletenuser@domainname.example.com:/home/tripletenuser/frontend",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && scp -r ./dist/* bluerosedevine@35.231.76.208:/home/bluerosedevine/frontend"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
